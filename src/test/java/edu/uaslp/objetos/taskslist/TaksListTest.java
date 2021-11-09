@@ -1,6 +1,5 @@
 package edu.uaslp.objetos.taskslist;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -14,7 +13,7 @@ public class TaksListTest {
     @Test
     public void givenANewTasksList_whenCreated_thenListIsEmpty() {
         // Given: (Inicialización)
-        TaskList taskList = new TaskList();
+        ToDoList taskList = new ToDoList();
 
         // When: (Ejecución)
         int itemsCount = taskList.getSize();
@@ -28,11 +27,12 @@ public class TaksListTest {
         // Given:
         Task task = new Task();
 
-        task.setTitle("Lavar los trastes");
+        task.setTittle("Lavar los trastes");
         task.setDescription("Lavar los trastes sin tirar mucha agua");
+        task.setDone(false);
 
         // When:
-        String title = task.getTitle();
+        String title = task.getTittle();
         String description = task.getDescription();
         LocalDateTime dueDate = task.getDueDate();
         boolean done = task.isDone();
@@ -49,13 +49,13 @@ public class TaksListTest {
         // Given:
         Task task = new Task();
 
-        task.setTitle("Lavar los trastes");
+        task.setTittle("Lavar los trastes");
         task.setDescription("Lavar los trastes sin tirar mucha agua");
         task.setDueDate(LocalDateTime.of(2021, Month.DECEMBER, 25, 0, 0, 0));
         task.setDone(false);
 
         // When:
-        String title = task.getTitle();
+        String title = task.getTittle();
         String description = task.getDescription();
         LocalDateTime dueDate = task.getDueDate();
         boolean done = task.isDone();
@@ -77,7 +77,7 @@ public class TaksListTest {
         // Then:
         assertThatThrownBy(() -> task.setDueDate(dateInThePast))
                 .hasMessage("Due date is set in the past")
-                .isInstanceOf(TaskListException.class)
+                .isInstanceOf(ToDoListException.class)
                 .isInstanceOf(RuntimeException.class);
 
     }
